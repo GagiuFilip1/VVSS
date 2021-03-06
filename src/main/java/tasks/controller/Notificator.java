@@ -24,7 +24,7 @@ public class Notificator extends Thread {
     @Override
     public void run() {
         Date currentDate = new Date();
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
 
             for (Task t : tasksList) {
                 if (t.isActive()) {
@@ -53,6 +53,7 @@ public class Notificator extends Thread {
 
             } catch (InterruptedException e) {
                 log.error("thread interrupted exception");
+                Thread.currentThread().interrupt();
             }
             currentDate = new Date();
         }
