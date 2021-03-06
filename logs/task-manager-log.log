@@ -9,3 +9,41 @@
 2021-02-17 09:36:41 INFO  Main:43 - application start
 2021-02-17 09:36:42 INFO  Controller:75 - Main controller initializing
 2021-02-17 09:36:50 INFO  NewEditController:91 - new/edit window initializing
+2021-03-06 17:15:53 INFO  Main:38 - saved data reading
+2021-03-06 17:15:53 INFO  Main:43 - application start
+2021-03-06 17:15:54 INFO  Controller:75 - Main controller initializing
+2021-03-06 17:19:30 INFO  Main:38 - saved data reading
+2021-03-06 17:19:30 INFO  Main:43 - application start
+2021-03-06 17:19:31 INFO  Controller:75 - Main controller initializing
+2021-03-06 18:12:32 INFO  Main:38 - saved data reading
+2021-03-06 18:12:32 INFO  Main:43 - application start
+2021-03-06 18:12:32 INFO  Controller:75 - Main controller initializing
+2021-03-06 18:12:36 INFO  NewEditController:91 - new/edit window initializing
+2021-03-06 18:22:52 INFO  Main:38 - saved data reading
+2021-03-06 18:22:52 INFO  Main:43 - application start
+2021-03-06 18:22:53 INFO  Controller:75 - Main controller initializing
+2021-03-06 18:28:10 INFO  TaskInfoController:26 - task info window initializing
+2021-03-06 18:28:10 ERROR Controller:128 - error loading task-info.fxml
+2021-03-06 18:28:15 INFO  TaskInfoController:26 - task info window initializing
+2021-03-06 18:28:15 ERROR Controller:128 - error loading task-info.fxml
+2021-03-06 18:28:15 INFO  TaskInfoController:26 - task info window initializing
+2021-03-06 18:28:15 ERROR Controller:128 - error loading task-info.fxml
+2021-03-06 18:28:16 INFO  TaskInfoController:26 - task info window initializing
+2021-03-06 18:28:16 ERROR Controller:128 - error loading task-info.fxml
+2021-03-06 18:28:16 INFO  TaskInfoController:26 - task info window initializing
+2021-03-06 18:28:16 ERROR Controller:128 - error loading task-info.fxml
+2021-03-06 18:29:18 INFO  Main:38 - saved data reading
+2021-03-06 18:29:18 INFO  Main:43 - application start
+2021-03-06 18:29:18 INFO  Controller:75 - Main controller initializing
+2021-03-06 18:29:47 INFO  NewEditController:91 - new/edit window initializing
+2021-03-06 18:29:52 INFO  NewEditController:91 - new/edit window initializing
+2021-03-06 18:29:58 INFO  NewEditController:91 - new/edit window initializing
+2021-03-06 18:30:36 INFO  TaskInfoController:26 - task info window initializing
+2021-03-06 18:30:36 ERROR Controller:128 - error loading task-info.fxml
+2021-03-06 18:40:57 INFO  Main:38 - saved data reading
+2021-03-06 18:40:57 INFO  Main:43 - application start
+2021-03-06 18:40:58 INFO  Controller:75 - Main controller initializing
+2021-03-06 18:41:01 INFO  TaskInfoController:26 - task info window initializing
+2021-03-06 18:41:01 ERROR Controller:128 - error loading task-info.fxml
+2021-03-06 18:41:12 INFO  NewEditController:91 - new/edit window initializing
+2021-03-06 18:41:17 INFO  TaskInfoController:26 - task info window initializing
