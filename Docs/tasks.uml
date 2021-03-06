@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>tasks</OriginalElement>
+  <nodes>
+    <node x="2707.5" y="1031.0">tasks.helpers.data.LinkedTaskList.Node</node>
+    <node x="707.5" y="1780.0">tasks.services.DateService</node>
+    <node x="3168.0" y="-2.0">tasks.helpers.builders.TaskBuilder</node>
+    <node x="2864.0" y="1345.0">tasks.helpers.data.TaskList</node>
+    <node x="2168.0" y="722.0">tasks.helpers.data.LinkedTaskList.LinkedTaskListIterator</node>
+    <node x="2440.0" y="871.0">tasks.helpers.data.LinkedTaskList</node>
+    <node x="1534.5" y="1968.0">tasks.controller.Controller</node>
+    <node x="1955.5" y="1278.0">tasks.dataContext.TaskDataContext</node>
+    <node x="1384.0" y="718.0">tasks.controller.TaskInfoController</node>
+    <node x="3436.5" y="354.0">tasks.model.Task</node>
+    <node x="3093.0" y="2460.0">tasks.helpers.network.Notificator</node>
+    <node x="969.5" y="1135.0">tasks.controller.NewEditController</node>
+    <node x="3444.0" y="2740.0">tasks.helpers.data.ArrayTaskList</node>
+    <node x="1981.0" y="2416.0">tasks.view.Main</node>
+    <node x="3692.0" y="2762.0">tasks.helpers.data.ArrayTaskList.ArrayTaskListIterator</node>
+    <node x="446.0" y="1653.0">tasks.services.TasksService</node>
+    <node x="156.0" y="653.0">tasks.helpers.operations.TasksOperations</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="tasks.helpers.data.LinkedTaskList.LinkedTaskListIterator" target="tasks.helpers.data.LinkedTaskList">
+      <point x="0.0" y="38.0" />
+      <point x="2280.0" y="880.0" />
+      <point x="-80.0" y="-40.0" />
+    </edge>
+    <edge source="tasks.helpers.data.LinkedTaskList.Node" target="tasks.helpers.data.LinkedTaskList">
+      <point x="-40.0" y="49.0" />
+      <point x="2720.0" y="1200.0" />
+      <point x="2550.0" y="1200.0" />
+      <point x="30.0" y="49.0" />
+    </edge>
+    <edge source="tasks.helpers.data.ArrayTaskList.ArrayTaskListIterator" target="tasks.helpers.data.ArrayTaskList">
+      <point x="-40.0" y="-38.0" />
+      <point x="3760.0" y="2680.0" />
+      <point x="3560.0" y="2680.0" />
+      <point x="40.0" y="-60.0" />
+    </edge>
+    <edge source="tasks.helpers.data.LinkedTaskList" target="tasks.helpers.data.TaskList">
+      <point x="0.0" y="49.0" />
+      <point x="2520.0" y="1354.2857142857142" />
+      <point x="-56.0" y="-5.714285714285779" />
+    </edge>
+    <edge source="tasks.helpers.data.ArrayTaskList" target="tasks.helpers.data.TaskList">
+      <point x="-76.0" y="-35.0" />
+      <point x="2920.0" y="2765.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Orthogonal" zoom="0.24635669673837612" x="2032.0" y="1429.0" />
+  <SelectedNodes>
+    <node>tasks.helpers.builders.TaskBuilder</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
