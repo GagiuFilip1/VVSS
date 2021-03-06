@@ -56,10 +56,11 @@ public class TaskIO {
                 Task taskToAdd;
                 if (interval > 0){
                     Date endTime = new Date(dataInputStream.readLong());
-                    taskToAdd = new Task(title, startTime, endTime, interval);
+                    //taskToAdd = new Task(title, startTime, endTime, interval);
+                    taskToAdd = Task.Builder.Init(title, "").WithInterval(startTime, endTime, interval).Build();
                 }
                 else {
-                    taskToAdd = new Task(title, startTime);
+                    taskToAdd = Task.Builder.Init(title,"", startTime).Build();
                 }
                 taskToAdd.setActive(isActive);
                 tasks.add(taskToAdd);
@@ -152,11 +153,12 @@ public class TaskIO {
             Date startTime = getDateFromText(line, true);
             Date endTime = getDateFromText(line, false);
             int interval = getIntervalFromText(line);
-            result = new Task(title, startTime, endTime, interval);
+            //result = new Task(title, startTime, endTime, interval);
+            result = Task.Builder.Init(title, "").WithInterval(startTime,endTime,interval).Build();
         }
         else {
             Date startTime = getDateFromText(line, true);
-            result = new Task(title, startTime);
+            result = Task.Builder.Init(title,"",startTime).Build();
         }
         result.setActive(isActive);
         return result;

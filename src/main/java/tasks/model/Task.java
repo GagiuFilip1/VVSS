@@ -1,6 +1,7 @@
 package tasks.model;
 
 import org.apache.log4j.Logger;
+import tasks.helpers.TaskBuilder;
 import tasks.services.TaskIO;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.Date;
 
 public class Task implements Serializable, Cloneable {
     private String title;
+    private String description;
     private Date time;
     private Date start;
     private Date end;
@@ -22,17 +24,8 @@ public class Task implements Serializable, Cloneable {
     public static SimpleDateFormat getDateFormat(){
         return sdf;
     }
-    public Task(String title, Date time){
-        if (time.getTime() < 0) {
-            log.error("time below bound");
-            throw new IllegalArgumentException("Time cannot be negative");
-        }
-        this.title = title;
-        this.time = time;
-        this.start = time;
-        this.end = time;
-    }
-    public Task(String title, Date start, Date end, int interval){
+    public static TaskBuilder Builder = new TaskBuilder();
+    public Task(String title, Date start, Date end, int interval, String description){
         if (start.getTime() < 0 || end.getTime() < 0) {
             log.error("time below bound");
             throw new IllegalArgumentException("Time cannot be negative");
@@ -46,6 +39,7 @@ public class Task implements Serializable, Cloneable {
         this.end = end;
         this.interval = interval;
         this.time = start;
+        this.description = description;
     }
 
     public String getTitle() {

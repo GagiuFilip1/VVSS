@@ -199,10 +199,11 @@ public class NewEditController {
             Date newEndDate = dateService.getDateMergedWithTime(txtFieldTimeEnd.getText(), endDateWithNoTime);
             int newInterval = service.parseFromStringToSeconds(fieldInterval.getText());
             if (newStartDate.after(newEndDate)) throw new IllegalArgumentException("Start date should be before end");
-            result = new Task(newTitle, newStartDate,newEndDate, newInterval);
+            result = Task.Builder.Init(newTitle,"").WithInterval(newStartDate, newEndDate,newInterval).Build();
         }
         else {
-            result = new Task(newTitle, newStartDate);
+            //result = new Task(newTitle , newStartDate);
+            result = Task.Builder.Init(newTitle,"", newStartDate).Build();
         }
         boolean isActive = checkBoxActive.isSelected();
         result.setActive(isActive);
