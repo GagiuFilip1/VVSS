@@ -1,11 +1,11 @@
-package tasks.services;
+package tasks.dataContext;
 
 
 import javafx.collections.ObservableList;
 import org.apache.log4j.Logger;
-import tasks.model.LinkedTaskList;
+import tasks.helpers.data.LinkedTaskList;
 import tasks.model.Task;
-import tasks.model.TaskList;
+import tasks.helpers.data.TaskList;
 import tasks.view.*;
 
 import java.io.*;
@@ -13,14 +13,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class TaskIO {
+public class TaskDataContext {
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("[yyyy-MM-dd HH:mm:ss.SSS]");
     private static final String[] TIME_ENTITY = {" day"," hour", " minute"," second"};
     private static final int secondsInDay = 86400;
     private static final int secondsInHour = 3600;
     private static final int secondsInMin = 60;
 
-    private static final Logger log = Logger.getLogger(TaskIO.class.getName());
+    private static final Logger log = Logger.getLogger(TaskDataContext.class.getName());
     public static void write(TaskList tasks, OutputStream out) throws IOException {
         DataOutputStream dataOutputStream = new DataOutputStream(out);
         try {
@@ -296,7 +296,7 @@ public class TaskIO {
             taskList.add(t);
         }
         try {
-            TaskIO.writeBinary(taskList, Main.savedTasksFile);
+            TaskDataContext.writeBinary(taskList, Main.savedTasksFile);
         }
         catch (IOException e){
             log.error("IO exception reading or writing file");

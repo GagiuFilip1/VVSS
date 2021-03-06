@@ -1,6 +1,7 @@
-package tasks.model;
+package tasks.helpers.operations;
 
 import javafx.collections.ObservableList;
+import tasks.model.Task;
 
 import java.util.*;
 

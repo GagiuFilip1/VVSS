@@ -1,4 +1,6 @@
-package tasks.model;
+package tasks.helpers.data;
+
+import tasks.model.Task;
 
 import java.io.Serializable;
 import java.util.Date;
