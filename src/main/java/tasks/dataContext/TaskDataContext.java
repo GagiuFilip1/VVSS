@@ -14,16 +14,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TaskDataContext {
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("[yyyy-MM-dd HH:mm:ss.SSS]");
+    private static SimpleDateFormat getSimpleDateFormat() {
+        return new SimpleDateFormat("[yyyy-MM-dd HH:mm:ss.SSS]");
+    }
     private static final String[] TIME_ENTITY = {" day"," hour", " minute"," second"};
-    private static final int secondsInDay = 86400;
-    private static final int secondsInHour = 3600;
-    private static final int secondsInMin = 60;
+    private static final int SECONDS_IN_DAY = 86400;
+    private static final int SECONDS_IN_HOUR = 3600;
+    private static final int SECONDS_IN_MIN = 60;
 
     private static final Logger log = Logger.getLogger(TaskDataContext.class.getName());
     public static void write(TaskList tasks, OutputStream out) throws IOException {
-        DataOutputStream dataOutputStream = new DataOutputStream(out);
-        try {
+        try(DataOutputStream dataOutputStream = new DataOutputStream(out);) {
             dataOutputStream.writeInt(tasks.size());
             for (Task t : tasks){
                 dataOutputStream.writeInt(t.getTitle().length());
@@ -39,13 +40,9 @@ public class TaskDataContext {
                 }
             }
         }
-        finally {
-            dataOutputStream.close();
-        }
     }
     public static void read(TaskList tasks, InputStream in)throws IOException {
-        DataInputStream dataInputStream = new DataInputStream(in);
-        try {
+        try(DataInputStream dataInputStream = new DataInputStream(in);) {
             int listLength = dataInputStream.readInt();
             for (int i = 0; i < listLength; i++){
                 int titleLength = dataInputStream.readInt();
@@ -56,7 +53,6 @@ public class TaskDataContext {
                 Task taskToAdd;
                 if (interval > 0){
                     Date endTime = new Date(dataInputStream.readLong());
-                    //taskToAdd = new Task(title, startTime, endTime, interval);
                     taskToAdd = Task.Builder.Init(title, "").WithInterval(startTime, endTime, interval).Build();
                 }
                 else {
@@ -66,35 +62,22 @@ public class TaskDataContext {
                 tasks.add(taskToAdd);
             }
         }
-        finally {
-            dataInputStream.close();
-        }
     }
     public static void writeBinary(TaskList tasks, File file)throws IOException{
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(file);
+        try(FileOutputStream fos = new FileOutputStream(file);) {
             write(tasks,fos);
         }
         catch (IOException e){
-            log.error("IO exception reading or writing file");
-        }
-        finally {
-            fos.close();
+            log.error("IO exception writing file");
         }
     }
 
     public static void readBinary(TaskList tasks, File file) throws IOException{
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(file);
+        try(FileInputStream fis =new FileInputStream(file);) {
             read(tasks, fis);
         }
         catch (IOException e){
-            log.error("IO exception reading or writing file");
-        }
-        finally {
-            fis.close();
+            log.error("IO exception reading file");
         }
     }
     public static void write(TaskList tasks, Writer out) throws IOException {
@@ -106,7 +89,6 @@ public class TaskDataContext {
             bufferedWriter.newLine();
         }
         bufferedWriter.close();
-
     }
 
     public static void read(TaskList tasks, Reader in)  throws IOException {
@@ -121,25 +103,16 @@ public class TaskDataContext {
 
     }
     public static void writeText(TaskList tasks, File file) throws IOException {
-        FileWriter fileWriter = new FileWriter(file);
-        try {
+        try(FileWriter fileWriter = new FileWriter(file);) {
             write(tasks, fileWriter);
         }
         catch (IOException e ){
             log.error("IO exception reading or writing file");
         }
-        finally {
-            fileWriter.close();
-        }
-
     }
     public static void readText(TaskList tasks, File file) throws IOException {
-        FileReader fileReader = new FileReader(file);
-        try {
+        try(FileReader fileReader = new FileReader(file);) {
             read(tasks, fileReader);
-        }
-        finally {
-            fileReader.close();
         }
     }
     //// service methods for reading
@@ -153,7 +126,6 @@ public class TaskDataContext {
             Date startTime = getDateFromText(line, true);
             Date endTime = getDateFromText(line, false);
             int interval = getIntervalFromText(line);
-            //result = new Task(title, startTime, endTime, interval);
             result = Task.Builder.Init(title, "").WithInterval(startTime,endTime,interval).Build();
         }
         else {
@@ -163,8 +135,7 @@ public class TaskDataContext {
         result.setActive(isActive);
         return result;
     }
-    //
-    private static int getIntervalFromText(String line){
+    private static int[] getTimeEntities(String line) {
         int days, hours, minutes, seconds;
         //[1 day 2 hours 46 minutes 40 seconds].
         //[46 minutes 40 seconds].
@@ -184,22 +155,28 @@ public class TaskDataContext {
             if (timeEntities[j] == 0) j--;
         }
 
-        String[] numAndTextValues = trimmed.split(" "); //{"46", "minutes", "40", "seconds"};
+        String[] numAndTextValues = trimmed.split(" ");
         for (int k = 0 ; k < numAndTextValues.length; k+=2){
             timeEntities[i] = Integer.parseInt(numAndTextValues[k]);
             i++;
         }
+        return timeEntities;
+    }
+
+    //
+    private static int getIntervalFromText(String line){
+        int[] timeEntities = getTimeEntities(line);
 
         int result = 0;
         for (int p = 0; p < timeEntities.length; p++){
             if (timeEntities[p] != 0 && p == 0){
-                result+=secondsInDay*timeEntities[p];
+                result+= SECONDS_IN_DAY *timeEntities[p];
             }
             if (timeEntities[p] != 0 && p == 1){
-                result+=secondsInHour*timeEntities[p];
+                result+= SECONDS_IN_HOUR *timeEntities[p];
             }
             if (timeEntities[p] != 0 && p == 2){
-                result+=secondsInMin*timeEntities[p];
+                result+= SECONDS_IN_MIN *timeEntities[p];
             }
             if (timeEntities[p] != 0 && p == 3){
                 result+=timeEntities[p];
@@ -224,7 +201,7 @@ public class TaskDataContext {
         }
         trimmedDate = line.substring(start, end+1);
         try {
-            date = simpleDateFormat.parse(trimmedDate);
+            date = getSimpleDateFormat().parse(trimmedDate);
         }
         catch (ParseException e){
             log.error("date parse exception");
@@ -250,16 +227,16 @@ public class TaskDataContext {
 
         if (task.isRepeated()){
             result.append(" from ");
-            result.append(simpleDateFormat.format(task.getStartTime()));
+            result.append(getSimpleDateFormat().format(task.getStartTime()));
             result.append(" to ");
-            result.append(simpleDateFormat.format(task.getEndTime()));
+            result.append(getSimpleDateFormat().format(task.getEndTime()));
             result.append(" every ").append("[");
             result.append(getFormattedInterval(task.getRepeatInterval()));
             result.append("]");
         }
         else {
             result.append(" at ");
-            result.append(simpleDateFormat.format(task.getStartTime()));
+            result.append(getSimpleDateFormat().format(task.getStartTime()));
         }
         if (!task.isActive()) result.append(" inactive");
         return result.toString().trim();
@@ -269,10 +246,10 @@ public class TaskDataContext {
         if (interval <= 0) throw new IllegalArgumentException("Interval <= 0");
         StringBuilder sb = new StringBuilder();
 
-        int days = interval/secondsInDay;
-        int hours = (interval - secondsInDay*days) / secondsInHour;
-        int minutes = (interval - (secondsInDay*days + secondsInHour*hours)) / secondsInMin;
-        int seconds = (interval - (secondsInDay*days + secondsInHour*hours + secondsInMin*minutes));
+        int days = interval/ SECONDS_IN_DAY;
+        int hours = (interval - SECONDS_IN_DAY *days) / SECONDS_IN_HOUR;
+        int minutes = (interval - (SECONDS_IN_DAY *days + SECONDS_IN_HOUR *hours)) / SECONDS_IN_MIN;
+        int seconds = (interval - (SECONDS_IN_DAY *days + SECONDS_IN_HOUR *hours + SECONDS_IN_MIN *minutes));
 
         int[] time = new int[]{days, hours, minutes, seconds};
         int i = 0, j = time.length-1;
