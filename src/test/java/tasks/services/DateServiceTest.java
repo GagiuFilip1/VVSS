@@ -1,6 +1,8 @@
 package tasks.services;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tasks.helpers.data.ArrayTaskList;
 
@@ -17,17 +19,24 @@ import static org.junit.jupiter.api.Assertions.*;
 class DateServiceTest {
 
     private static DateService dateService;
+    private static Instant instant;
+
 
     @BeforeAll
     static void setUp() {
         dateService = new DateService(new TasksService(new ArrayTaskList()));
     }
 
+    @BeforeEach
+    void init() {
+        instant = Instant.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()));
+    }
+
+
     @Test
     void getDateMergedWithTime_WithNegative_Hour_Throws() {
         //Arrange
         String time = "-1:0";
-        Instant instant = Instant.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
         //Act //Assert
         assertThrows(IllegalArgumentException.class, () -> dateService.getDateMergedWithTime(time, date));
@@ -37,7 +46,6 @@ class DateServiceTest {
     void getDateMergedWithTime_WithNegative_Minute_Throws() {
         //Arrange
         String time = "0:-1";
-        Instant instant = Instant.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
         //Act //Assert
         assertThrows(IllegalArgumentException.class, () -> dateService.getDateMergedWithTime(time, date));
@@ -47,7 +55,6 @@ class DateServiceTest {
     void getDateMergedWithTime_WithPositive_Hour_Ok() {
         //Arrange
         String time = "1:00";
-        Instant instant = Instant.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
         Date result;
 
@@ -80,7 +87,6 @@ class DateServiceTest {
     void getDateMergedWithTime_WithMax_Hour_Ok() {
         //Arrange
         String time = "24:00";
-        Instant instant = Instant.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
         Date result;
 
@@ -96,7 +102,6 @@ class DateServiceTest {
     void getDateMergedWithTime_WithMax_Minute_Ok() {
         //Arrange
         String time = "0:60";
-        Instant instant = Instant.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
         Date result;
 
@@ -112,7 +117,6 @@ class DateServiceTest {
     void getDateMergedWithTime_WithGreaterThanMax_Hour_Throws() {
         //Arrange
         String time = "25:0";
-        Instant instant = Instant.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
         //Act //Assert
         assertThrows(IllegalArgumentException.class, () -> dateService.getDateMergedWithTime(time, date));
@@ -123,7 +127,6 @@ class DateServiceTest {
     void getDateMergedWithTime_WithGreaterThanMax_Minute_Throws() {
         //Arrange
         String time = "0:61";
-        Instant instant = Instant.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
         //Act //Assert
         assertThrows(IllegalArgumentException.class, () -> dateService.getDateMergedWithTime(time, date));
