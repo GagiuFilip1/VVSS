@@ -34,7 +34,7 @@ class DateServiceTest {
 
 
     @Test
-    void getDateMergedWithTime_WithNegative_Hour_Throws() {
+    public void getDateMergedWithTime_WithNegative_Hour_Throws() {
         //Arrange
         String time = "-1:0";
         Date date = Date.from(instant);
@@ -43,7 +43,7 @@ class DateServiceTest {
     }
 
     @Test
-    void getDateMergedWithTime_WithNegative_Minute_Throws() {
+    public void getDateMergedWithTime_WithNegative_Minute_Throws() {
         //Arrange
         String time = "0:-1";
         Date date = Date.from(instant);
@@ -52,7 +52,7 @@ class DateServiceTest {
     }
 
     @Test
-    void getDateMergedWithTime_WithPositive_Hour_Ok() {
+    public void getDateMergedWithTime_WithPositive_Hour_Ok() {
         //Arrange
         String time = "1:00";
         Date date = Date.from(instant);
@@ -68,7 +68,7 @@ class DateServiceTest {
     }
 
     @Test
-    void getDateMergedWithTime_WithPositive_Minutes_Ok() {
+    public void getDateMergedWithTime_WithPositive_Minutes_Ok() {
         //Arrange
         String time = "0:1";
         Instant instant = Instant.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()));
@@ -84,7 +84,7 @@ class DateServiceTest {
     }
 
     @Test
-    void getDateMergedWithTime_WithMax_Hour_Ok() {
+    public void getDateMergedWithTime_WithMax_Hour_Ok() {
         //Arrange
         String time = "24:00";
         Date date = Date.from(instant);
@@ -99,7 +99,7 @@ class DateServiceTest {
     }
 
     @Test
-    void getDateMergedWithTime_WithMax_Minute_Ok() {
+    public void getDateMergedWithTime_WithMax_Minute_Ok() {
         //Arrange
         String time = "0:60";
         Date date = Date.from(instant);
@@ -114,7 +114,7 @@ class DateServiceTest {
     }
 
     @Test
-    void getDateMergedWithTime_WithGreaterThanMax_Hour_Throws() {
+    public void getDateMergedWithTime_WithGreaterThanMax_Hour_Throws() {
         //Arrange
         String time = "25:0";
         Date date = Date.from(instant);
@@ -124,7 +124,7 @@ class DateServiceTest {
     }
 
     @Test
-    void getDateMergedWithTime_WithGreaterThanMax_Minute_Throws() {
+    public void getDateMergedWithTime_WithGreaterThanMax_Minute_Throws() {
         //Arrange
         String time = "0:61";
         Date date = Date.from(instant);
