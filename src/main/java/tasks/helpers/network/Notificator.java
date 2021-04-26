@@ -15,7 +15,7 @@ public class Notificator extends Thread {
 
     private static final Logger log = Logger.getLogger(Notificator.class.getName());
 
-    private ObservableList<Task> tasksList;
+    private final ObservableList<Task> tasksList;
 
     public Notificator(ObservableList<Task> tasksList){
         this.tasksList=tasksList;

@@ -26,7 +26,7 @@ public class TaskDataContext {
     private static final Logger log = Logger.getLogger(TaskDataContext.class.getName());
 
     public static void write(TaskList tasks, OutputStream out) throws IOException {
-        try (DataOutputStream dataOutputStream = new DataOutputStream(out);) {
+        try (DataOutputStream dataOutputStream = new DataOutputStream(out)) {
             dataOutputStream.writeInt(tasks.size());
             for (Task t : tasks) {
                 dataOutputStream.writeInt(t.getTitle().length());
@@ -44,7 +44,7 @@ public class TaskDataContext {
     }
 
     public static void read(TaskList tasks, InputStream in) throws IOException {
-        try (DataInputStream dataInputStream = new DataInputStream(in);) {
+        try (DataInputStream dataInputStream = new DataInputStream(in)) {
             int listLength = dataInputStream.readInt();
             for (int i = 0; i < listLength; i++) {
                 int titleLength = dataInputStream.readInt();
@@ -67,7 +67,7 @@ public class TaskDataContext {
     }
 
     public static void writeBinary(TaskList tasks, File file) throws IOException {
-        try (FileOutputStream fos = new FileOutputStream(file);) {
+        try (FileOutputStream fos = new FileOutputStream(file)) {
             write(tasks, fos);
         } catch (IOException e) {
             log.error("IO exception writing file");
@@ -75,7 +75,7 @@ public class TaskDataContext {
     }
 
     public static void readBinary(TaskList tasks, File file) throws IOException {
-        try (FileInputStream fis = new FileInputStream(file);) {
+        try (FileInputStream fis = new FileInputStream(file)) {
             read(tasks, fis);
         } catch (IOException e) {
             log.error("IO exception reading file");
@@ -106,7 +106,7 @@ public class TaskDataContext {
     }
 
     public static void writeText(TaskList tasks, File file) throws IOException {
-        try (FileWriter fileWriter = new FileWriter(file);) {
+        try (FileWriter fileWriter = new FileWriter(file)) {
             write(tasks, fileWriter);
         } catch (IOException e) {
             log.error("IO exception reading or writing file");
@@ -114,7 +114,7 @@ public class TaskDataContext {
     }
 
     public static void readText(TaskList tasks, File file) throws IOException {
-        try (FileReader fileReader = new FileReader(file);) {
+        try (FileReader fileReader = new FileReader(file)) {
             read(tasks, fileReader);
         }
     }
@@ -245,7 +245,8 @@ public class TaskDataContext {
     }
 
     public static String getFormattedInterval(int interval) {
-        if (interval <= 0) throw new IllegalArgumentException("Interval <= 0");
+        if (interval <= 0)
+            throw new IllegalArgumentException("Interval <= 0");
         StringBuilder sb = new StringBuilder();
 
         int days = interval / SECONDS_IN_DAY;
