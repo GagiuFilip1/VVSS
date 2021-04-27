@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class TasksService {
 
-    private ArrayTaskList tasks;
+    private final ArrayTaskList tasks;
 
     public TasksService(ArrayTaskList tasks){
         this.tasks = tasks;

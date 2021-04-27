@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class Task implements Serializable, Cloneable {
     private String title;
-    private String description;
+    private final String description;
     private Date time;
     private Date start;
     private Date end;

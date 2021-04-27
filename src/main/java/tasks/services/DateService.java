@@ -13,7 +13,7 @@ public class DateService {
     public static final int MINUTES_IN_HOUR = 60;
     public static final int HOURS_IN_A_DAY = 24;
 
-    private TasksService service;
+    private final TasksService service;
 
     public DateService(TasksService service){
         this.service=service;
